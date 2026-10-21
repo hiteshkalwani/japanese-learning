@@ -1,0 +1,81 @@
+:root {
+  --bg: #faf8f5; --fg: #1f1d1a; --muted: #7a746c; --card: #fff; --line: #e7e2da;
+  --accent: #c8102e; --ok: #2e7d4f; --bad: #c8102e; --data: #2f6fd6;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171615; --fg: #eeeae4; --muted: #9c958b; --card: #22201e; --line: #353230;
+    --accent: #ff5a6e; --ok: #3f9e68; --bad: #d64545; --data: #6b9cff;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.6 system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+a { color: var(--accent); }
+h1 { font-size: 1.6rem; margin: .5rem 0 .75rem; }
+.muted { color: var(--muted); }
+
+.btn {
+  font: inherit; padding: .65rem 1.1rem; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--card); color: var(--fg); cursor: pointer; text-decoration: none; display: inline-block;
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.wide { width: 100%; }
+.btn:disabled { cursor: default; }
+
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); margin-top: 20px; }
+.lesson {
+  display: flex; flex-direction: column; gap: 4px; padding: 16px; color: var(--fg); text-decoration: none;
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+}
+.lesson:hover { border-color: var(--accent); }
+.num { color: var(--accent); font-weight: 600; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin-top: 6px; }
+.bar i { display: block; height: 100%; background: var(--ok); }
+
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 20px; overflow-x: auto; }
+.tabs a { padding: .5rem .9rem; color: var(--muted); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+.tabs a.active { color: var(--fg); border-color: var(--accent); }
+
+table.vocab { width: 100%; border-collapse: collapse; }
+.vocab td { padding: .45rem .4rem; border-bottom: 1px solid var(--line); }
+.kana { font-size: 1.15rem; }
+.say { border: 0; background: none; cursor: pointer; font-size: 1rem; padding: 4px; }
+
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  padding: 40px 20px; text-align: center; margin: 12px 0 16px;
+}
+.big { font-size: 2.2rem; line-height: 1.3; overflow-wrap: anywhere; }
+.big-ish { font-size: 1.6rem; }
+.back { margin-top: 16px; font-size: 1.2rem; }
+.actions, .options { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+.opt.right { background: var(--ok); border-color: var(--ok); color: #fff; }
+.opt.wrong { background: var(--bad); border-color: var(--bad); color: #fff; }
+.score { font-size: 3rem; text-align: center; margin: 24px 0; }
+.empty { text-align: center; padding: 32px 0; }
+.mid { font-size: 1.4rem; line-height: 1.5; }
+.btn.link { border: 0; background: none; color: var(--muted); width: 100%; margin-top: 12px; text-decoration: underline; }
+.setup { display: flex; align-items: center; gap: 12px; font-size: 1.1rem; margin-bottom: 8px; }
+.setup select { font: inherit; padding: .4rem .6rem; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+
+.chart { display: grid; gap: 10px; }
+.chart .row { display: grid; grid-template-columns: 9.5rem 1fr 6.5rem; gap: 10px; align-items: center; }
+.chart .track { height: 12px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.chart .track i { display: block; height: 100%; background: var(--data); border-radius: 4px; }
+.chart .row:hover .track i { filter: brightness(1.15); }
+.missed li { margin-bottom: 6px; }
+h2 { font-size: 1.2rem; margin: 28px 0 0; }
+
+.kanji-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.kanji { display: flex; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.kanji .char { font-size: 3rem; line-height: 1; min-width: 3.2rem; text-align: center; }
+.kanji ul { list-style: none; padding: 0; margin: 6px 0 0; }
+
+.grammar { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 4px 20px 12px; margin-bottom: 14px; }
+.grammar h3 { color: var(--accent); }
+.grammar li { margin-bottom: 10px; }
