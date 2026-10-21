@@ -29,8 +29,38 @@ No frameworks, no build step, no dependencies: plain HTML, CSS and JavaScript.
 "what to brush up" list for any section under 80%, and the questions you missed. Missed items are
 added to that day's flashcard reviews.
 
-**Home page:** your progress for each lesson and kanji level, plus *Review due cards*, which
-collects due cards from everything in the app.
+**Navbar:** Dashboard · Chapters · Practice · Quiz · Flashcards · Kanji · Exam
+
+| Page | What it does |
+|---|---|
+| Dashboard | Today's reviews and questions, your day streak, chapters completed, a 14-day activity chart, progress bars for each chapter and kanji level, and recent exam scores |
+| Chapters | All lessons; open one for its Vocabulary, Flashcards, Quiz and Grammar tabs |
+| Practice | Drills for learning, one skill at a time: Hiragana, Katakana, Kanji, Grammar and Sentence building (see below) |
+| Quiz | Revision quiz from the chapters you tick |
+| Flashcards | Review due cards from the chapters and kanji levels you tick |
+| Kanji | Kanji by JLPT level |
+| Exam | JLPT N5-style practice test from the chapters you tick (see below) |
+
+**Practice vs. Quiz:** a quiz is a test, with a set number of questions, a score and a results
+chart. Practice is for learning: it runs until you leave, with no score report, only instant
+right/wrong feedback and a running ✓/✗ tally. Anything you miss comes back a few questions later.
+
+| Practice tab | What you do |
+|---|---|
+| Hiragana / Katakana | Tap the chart to hear each character, then drill reading (kana → romaji), writing (romaji → kana) and listening |
+| Kanji | Meanings, readings, example words and recall, for the levels you tick |
+| Grammar | Fill-in-the-blank particles and phrases, and sentence meanings, from the chapters you tick |
+| Sentence building | See the English meaning, then tap the jumbled Japanese pieces in the right order |
+
+A chapter counts as **completed** when every word is learned, which means "Got it" twice in a row
+in flashcards.
+
+**Exam** (JLPT N5 style): questions are grouped into もんだい with the real test's Japanese
+instructions, four numbered choices, a time limit (a minute per question), and no answers until
+you submit. The sections are 漢字読み (kanji reading, 7), 表記 (writing, 5), 文法 (grammar, 9),
+並べ替え ★ (sentence order, 4) and 聴解 (listening, 5). Scores use the JLPT scale: language
+knowledge out of 120 (at least 38) plus listening out of 60 (at least 19), with 80/180 to pass. It's a
+practice estimate: the real exam scales scores differently and also has reading passages.
 
 Progress is saved in your browser (`localStorage`), so there's no account or server. It stays
 in the browser you used and is separate for each address (the file vs. `localhost`).
@@ -56,8 +86,8 @@ Rebuild (`--build`) after you change any files, because the files are copied int
 
 ```
 index.html        Page shell; loads every script below
-app.js            Views: home, lessons, kanji, flashcards, quizzes, results
-srs.js            Spaced-repetition schedule and quiz helpers (random options, weighted picking)
+app.js            Pages: dashboard, chapters, quiz, flashcards, kanji, exam, results
+srs.js            Logic: spaced repetition, quiz picking, streaks, ★ questions, JLPT scoring
 style.css         Styles, with light and dark themes
 lessons/          One file per Minna no Nihongo lesson
 kanji/            One file per JLPT level

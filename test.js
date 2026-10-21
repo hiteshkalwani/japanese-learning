@@ -75,4 +75,28 @@ assert.strictEqual(opts.length, 4);
 assert(opts.includes('a'));
 assert.strictEqual(new Set(opts).size, 4, 'options are distinct');
 
+const { dayKey, streak, pieces, starQuestion, jlptScore } = require('./srs.js');
+assert.deepStrictEqual(pieces('わたしは マイク・ミラーです。'), ['わたし', 'は', 'マイク・ミラーです']);
+assert.deepStrictEqual(pieces('（hint）これを ください。'), ['これ', 'を', 'ください']);
+const today = new Date(2026, 9, 21), back = n => dayKey(new Date(2026, 9, 21 - n));
+assert.strictEqual(dayKey(today), '2026-10-21');
+assert.strictEqual(streak({ [back(0)]: {}, [back(1)]: {}, [back(3)]: {} }, today), 2);
+assert.strictEqual(streak({ [back(1)]: {}, [back(2)]: {} }, today), 2, 'streak survives until you study today');
+assert.strictEqual(streak({ [back(2)]: {} }, today), 0);
+
+assert.deepStrictEqual(starQuestion('ミラーさんは IMCの しゃいんです。'),
+  { prompt: '＿＿ ＿＿ ★ ＿＿。', answer: 'IMCの', choices: ['ミラーさん', 'は', 'IMCの', 'しゃいんです'] });
+assert.strictEqual(starQuestion('これは じしょです。'), null, 'too short');
+assert.strictEqual(starQuestion('ミラーさんは せんせいです。グプタさんも せんせいです。'), null, 'two sentences');
+for (const l of window.LESSONS) for (const g of l.grammar) for (const [jp] of g.examples) {
+  const q = starQuestion(jp);
+  if (q) assert(q.prompt.includes('★') && q.choices.includes(q.answer) && new Set(q.choices).size === 4, jp);
+}
+
+assert.deepStrictEqual(jlptScore(0.5, 0.5), { lang: 60, listen: 30, total: 90, max: 180, pass: true });
+assert.strictEqual(jlptScore(0.3, 1).pass, false, 'language part under 38');
+assert.strictEqual(jlptScore(0.9, 0.3).pass, false, 'listening part under 19');
+assert.strictEqual(jlptScore(0.5, null).pass, true);
+assert.strictEqual(jlptScore(0.4, null).pass, false, '48/120 is under the scaled pass mark');
+
 console.log(`ok: ${window.LESSONS.length} lessons, ${window.LESSONS.reduce((n, l) => n + l.vocab.length, 0)} words`);

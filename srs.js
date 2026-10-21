@@ -36,4 +36,40 @@ function pickWeighted(sections, weights, n) {
   }));
 }
 
-if (typeof module !== 'undefined') module.exports = { review, isDue, shuffle, quizOptions, pickWeighted, DAY };
+// Local calendar date as YYYY-MM-DD ('sv' locale formats dates that way).
+const dayKey = (d = new Date()) => d.toLocaleDateString('sv');
+
+// Consecutive active days ending today, or yesterday so a streak survives until you study today.
+function streak(log, now = new Date()) {
+  let n = 0;
+  const d = new Date(now);
+  if (!log[dayKey(d)]) d.setDate(d.getDate() - 1);
+  while (log[dayKey(d)]) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+
+// Split a spaced sentence into phrase pieces; the particles は/を/も become pieces of their own.
+const pieces = sentence => sentence.replace(/（[^）]*）/g, '').trim().replace(/[。？]$/, '')
+  .split(/\s+/).flatMap(t => /^.+[はをも]$/.test(t) ? [t.slice(0, -1), t.slice(-1)] : [t]);
+
+// JLPT 並べ替え: hide 4 pieces in a row; the answer is the one in the ★ slot (3rd).
+function starQuestion(sentence) {
+  const s = sentence.split('…')[0].replace(/（[^）]*）/g, '').trim();
+  if (/。./.test(s)) return null;
+  const parts = pieces(s);
+  if (parts.length < 4) return null;
+  const at = Math.floor(Math.random() * (parts.length - 3)), hidden = parts.slice(at, at + 4);
+  if (new Set(hidden).size < 4) return null;
+  const shown = [...parts.slice(0, at), '＿＿', '＿＿', '★', '＿＿', ...parts.slice(at + 4)];
+  return { prompt: shown.join(' ') + '。', answer: hidden[2], choices: hidden };
+}
+
+// JLPT N5 scale: language knowledge 0–120 (min 38) + listening 0–60 (min 19); pass needs 80 of 180.
+// Without listening (browser can't speak) the 80 pass mark is scaled to the 120 available.
+function jlptScore(langRatio, listenRatio) {
+  const lang = Math.round(120 * langRatio), listen = listenRatio == null ? null : Math.round(60 * listenRatio);
+  const total = lang + (listen ?? 0), max = listen == null ? 120 : 180;
+  return { lang, listen, total, max, pass: lang >= 38 && (listen == null || listen >= 19) && total >= 80 * max / 180 };
+}
+
+if (typeof module !== 'undefined') module.exports = { review, isDue, shuffle, quizOptions, pickWeighted, dayKey, streak, pieces, starQuestion, jlptScore, DAY };
