@@ -87,6 +87,7 @@ assert.strictEqual(streak({ [back(2)]: {} }, today), 0);
 assert.deepStrictEqual(starQuestion('ミラーさんは IMCの しゃいんです。'),
   { prompt: '＿＿ ＿＿ ★ ＿＿。', answer: 'IMCの', choices: ['ミラーさん', 'は', 'IMCの', 'しゃいんです'] });
 assert.strictEqual(starQuestion('これは じしょです。'), null, 'too short');
+assert.strictEqual(starQuestion('（た-form）かきます → かいた ことが ありません'), null, 'conjugation drill');
 assert.strictEqual(starQuestion('ミラーさんは せんせいです。グプタさんも せんせいです。'), null, 'two sentences');
 for (const l of window.LESSONS) for (const g of l.grammar) for (const [jp] of g.examples) {
   const q = starQuestion(jp);

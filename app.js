@@ -442,7 +442,11 @@ const EXAM = [
   { name: '文法 (grammar)', n: 9, instr: '（　）に 何を 入れますか。1・2・3・4から いちばん いい ものを 一つ えらんで ください。',
     make: ({ quiz }) => quiz.map(([s, answer, wrong]) => ({ prompt: s.replaceAll('＿', '（　）'), answer, choices: [answer, ...wrong] })) },
   { name: '並べ替え (sentence order)', n: 4, instr: '★ に 入る ものは どれですか。1・2・3・4から いちばん いい ものを 一つ えらんで ください。',
-    make: ({ sentences }) => sentences.map(starQuestion).filter(Boolean) },
+    make: ({ sentences }) => {
+      const qs = sentences.map(starQuestion).filter(Boolean);
+      const withContext = qs.filter(q => q.prompt !== '＿＿ ＿＿ ★ ＿＿。'); // real ★ questions show part of the sentence
+      return withContext.length >= 4 ? withContext : qs;
+    } },
   { name: LISTENING, n: 5, instr: '🔊 を おして ことばを きいて ください。1・2・3・4から いちばん いい ものを 一つ えらんで ください。',
     make: ({ v }) => window.speechSynthesis ? v.map(w => ({ id: w.id, prompt: '', say: w.kana, answer: w.kana, choices: quizOptions(w.kana, v.map(x => x.kana)) })) : [] },
 ];
@@ -555,7 +559,7 @@ function renderPractice(tab) {
       const ls = need(pickedLessons());
       if (!ls) return;
       const all = ls.flatMap(l => [...l.grammar.flatMap(g => g.examples), ...l.quiz.map(([s, a, , en]) => [s.replaceAll('＿', a), en])])
-        .filter(([jp]) => !/…|＝/.test(jp) && !/。./.test(jp.trim()))
+        .filter(([jp]) => !/…|＝|→/.test(jp) && !/。./.test(jp.trim())) // skip dialogues, sums and conjugation drills
         .map(([jp, en]) => ({ jp: jp.replace(/（[^）]*）/g, '').trim(), en, parts: pieces(jp) }))
         .filter(s => s.parts.length >= 3);
       buildSentences(view, [...new Map(all.map(s => [s.jp, s])).values()]);

@@ -1,0 +1,92 @@
+(window.LESSONS ||= []).push({
+  id: 25,
+  title: 'いろいろ お世話に なりました',
+  vocab: [
+    ['かんがえます', '考えます', 'think, consider'],
+    ['[えきに] つきます', '[駅に] 着きます', 'arrive [at the station]'],
+    ['[としを] とります', '[年を] 取ります', 'grow old'],
+    ['たります', '足ります', 'be enough'],
+    ['いなか', '田舎', 'countryside, hometown'],
+    ['たいしかん', '大使館', 'embassy'],
+    ['グループ', '', 'group'],
+    ['チャンス', '', 'chance'],
+    ['おく', '億', 'hundred million'],
+    ['もし [～たら]', '', 'if'],
+    ['いくら [～ても]', '', 'no matter how (much)'],
+    ['てんきん', '転勤', 'job transfer (to another office)'],
+    ['こと', '', 'thing, matter (～の こと)'],
+    ['いっぱい のみましょう', '一杯 飲みましょう', 'let\'s have a drink'],
+    ['[いろいろ] おせわに なりました', '[いろいろ] お世話に なりました', 'thank you for everything'],
+    ['がんばります', '頑張ります', 'do one\'s best'],
+    ['どうぞ おげんきで', 'どうぞ お元気で', 'please take care'],
+  ],
+  grammar: [
+    {
+      pattern: 'Plain past + ら、～ (たら: if)',
+      note: 'Make the plain past form and add ら: ふった → ふったら, なかった → なかったら, い-adj たかかった → たかかったら, な-adj / N: ひまだった → ひまだったら. It means "if …" and the second half can be a wish, request or plan.',
+      examples: [
+        ['あめが ふったら、でかけません。', 'If it rains, I won\'t go out.'],
+        ['おかねが あったら、りょこうします。', 'If I have money, I\'ll travel.'],
+        ['ひまだったら、あそびに きて ください。', 'If you\'re free, please come over.'],
+      ],
+    },
+    {
+      pattern: 'V たら、～ (when / after)',
+      note: 'With something that will surely happen, たら means "when / after that happens, …".',
+      examples: [
+        ['10じに なったら、でかけましょう。', 'When it gets to 10 o\'clock, let\'s go out.'],
+        ['うちへ かえったら、すぐ シャワーを あびます。', 'When I get home, I take a shower right away.'],
+      ],
+    },
+    {
+      pattern: 'V て / い-adj くて / な-adj で / N で ＋ も',
+      note: '"Even if …": the result is not what you would expect from the condition. Forms: ふっても, たかくても, ひまでも, あめでも.',
+      examples: [
+        ['あめが ふっても、でかけます。', 'Even if it rains, I\'ll go out.'],
+        ['やすくても、わたしは グループりょこうが きらいです。', 'Even if it\'s cheap, I don\'t like group tours.'],
+      ],
+    },
+    {
+      pattern: 'もし ～たら',
+      note: 'もし at the start signals "if" in advance and stresses that it is only a supposition.',
+      examples: [
+        ['もし 1おくえん あったら、いろいろな くにを りょこうしたいです。', 'If I had 100 million yen, I\'d like to travel to many countries.'],
+      ],
+    },
+    {
+      pattern: 'いくら ～ても',
+      note: 'いくら with ても means "no matter how (much) …".',
+      examples: [
+        ['いくら かんがえても、わかりません。', 'No matter how much I think, I don\'t understand.'],
+        ['いくら たかくても、かいます。', 'No matter how expensive it is, I\'ll buy it.'],
+      ],
+    },
+    {
+      pattern: 'N が (subject inside a たら / ても clause)',
+      note: 'The subject of a clause like たら or ても is marked with が, not は.',
+      examples: [
+        ['ともだちが きたら、いっしょに でかけます。', 'When my friend comes, we\'ll go out together.'],
+      ],
+    },
+  ],
+  quiz: [
+    ['あめが ＿、でかけません。', 'ふったら', ['ふります', 'ふった', 'ふる'], 'If it rains, I won\'t go out.'],
+    ['いくら ＿、わかりません。', 'かんがえても', ['かんがえたら', 'かんがえて', 'かんがえます'], 'No matter how much I think, I don\'t understand.'],
+    ['もし 1おくえん ＿、いえを かいたいです。', 'あったら', ['あって', 'あります', 'ある'], 'If I had 100 million yen, I\'d like to buy a house.'],
+    ['いくら やす＿、かいません。', 'くても', ['かったら', 'くて', 'いです'], 'No matter how cheap it is, I won\'t buy it.'],
+    ['ひま＿、あそびに きて ください。', 'だったら', ['な', 'に', 'だ'], 'If you\'re free, please come over.'],
+    ['えきに ＿、でんわして ください。', 'ついたら', ['つきます', 'ついた', 'つく'], 'When you arrive at the station, please call me.'],
+    ['10じに ＿、でかけましょう。', 'なったら', ['なります', 'なった', 'なる'], 'When it gets to 10 o\'clock, let\'s go out.'],
+    ['じかんが ＿、テレビを みません。', 'なかったら', ['ないたら', 'なかって', 'ないでも'], 'If I don\'t have time, I won\'t watch TV.'],
+    ['おかねが ＿、くるまを かいます。', 'あったら', ['ありたら', 'あるたら', 'あったで'], 'If I have money, I\'ll buy a car.'],
+    ['おかねが ＿から、かえません。', 'たりません', ['つきません', 'かんがえません', 'とりません'], 'I don\'t have enough money, so I can\'t buy it.'],
+    ['としを ＿ました。', 'とり', ['たり', 'つき', 'かんがえ'], 'I\'ve grown old.'],
+    ['しごとの ことを よく ＿ ください。', 'かんがえて', ['たりて', 'ついて', 'とって'], 'Please think carefully about the job.'],
+    ['＿ たかくても、かいます。', 'いくら', ['どうぞ', 'ほかに', 'じぶんで'], 'No matter how expensive it is, I\'ll buy it.'],
+    ['＿ 1おくえん あったら、なにを しますか。', 'もし', ['いくら', 'どうぞ', 'ぜんぶ'], 'If you had 100 million yen, what would you do?'],
+    ['ともだち＿ きたら、いっしょに でかけます。', 'が', ['を', 'で', 'へ'], 'When my friend comes, we\'ll go out together.'],
+    ['いろいろ おせわに ＿。', 'なりました', ['しました', 'くれました', 'いきました'], 'Thank you for everything.'],
+    ['どうぞ お＿で。', 'げんき', ['ひま', 'しずか', 'べんり'], 'Please take care.'],
+    ['グループ＿ りょこうします。', 'で', ['を', 'へ', 'まで'], 'We travel as a group.'],
+  ],
+});

@@ -55,7 +55,7 @@ const pieces = sentence => sentence.replace(/（[^）]*）/g, '').trim().replace
 // JLPT 並べ替え: hide 4 pieces in a row; the answer is the one in the ★ slot (3rd).
 function starQuestion(sentence) {
   const s = sentence.split('…')[0].replace(/（[^）]*）/g, '').trim();
-  if (/。./.test(s)) return null;
+  if (/。.|＝|→/.test(s)) return null; // two sentences, or a number/conjugation drill
   const parts = pieces(s);
   if (parts.length < 4) return null;
   const at = Math.floor(Math.random() * (parts.length - 3)), hidden = parts.slice(at, at + 4);

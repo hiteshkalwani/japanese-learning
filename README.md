@@ -8,7 +8,7 @@ No frameworks, no build step, no dependencies: plain HTML, CSS and JavaScript.
 
 ## Features
 
-**Lessons** (Minna no Nihongo 第1–3課 so far)
+**Lessons** (Minna no Nihongo 第1–25課, all of N5)
 
 | Tab | What it does |
 |---|---|
@@ -163,7 +163,7 @@ section has been used.
 
 ## Roadmap
 
-- [ ] Minna no Nihongo lessons 4–25 (rest of N5)
+- [x] Minna no Nihongo lessons 1–25 (N5)
 - [ ] Kanji N4, N3, N2, N1
 - [ ] Lessons 26–50 (N4)
 
