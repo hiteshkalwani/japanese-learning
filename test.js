@@ -25,6 +25,7 @@ for (const lv of window.KANJI) {
     seen.add(char);
     assert(examples.length && examples.every(e => e.length === 3 && e[0].includes(char) && e[1] && e[2]),
       `${lv.level}: bad example for ${char} (each needs [word containing the kanji, reading, meaning])`);
+    assert(window.STROKES?.[char]?.length, `${lv.level}: no stroke order for ${char} (run node scripts/build-strokes.js)`);
   }
 }
 

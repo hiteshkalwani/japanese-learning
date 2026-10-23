@@ -21,7 +21,7 @@ No frameworks, no build step, no dependencies: plain HTML, CSS and JavaScript.
 
 | Tab | What it does |
 |---|---|
-| Kanji list | Every kanji with its meaning, 音 (on) and 訓 (kun) readings, and example words |
+| Kanji list | Every kanji with its meaning, 音 (on) and 訓 (kun) readings, and example words. Tap a kanji to watch its stroke order |
 | Flashcards | Same spaced-repetition schedule as the vocabulary |
 | Quiz | 10–200 questions mixed from Meaning, Words, Readings and Recall |
 
@@ -90,7 +90,8 @@ app.js            Pages: dashboard, chapters, quiz, flashcards, kanji, exam, res
 srs.js            Logic: spaced repetition, quiz picking, streaks, ★ questions, JLPT scoring
 style.css         Styles, with light and dark themes
 lessons/          One file per Minna no Nihongo lesson
-kanji/            One file per JLPT level
+kanji/            One file per JLPT level, plus strokes.js (generated stroke order data)
+scripts/          build-strokes.js: downloads stroke order from KanjiVG into kanji/strokes.js
 test.js           Checks the data files and the scheduling/quiz logic
 Dockerfile        nginx image that serves the app
 compose.yaml      Runs the image on port 8505
@@ -138,6 +139,8 @@ badly formatted items.
 
    Use `''` for a reading the kanji doesn't have. Each example word must contain the kanji.
 3. Add `<script src="kanji/n4.js"></script>` to `index.html`.
+4. Run `node scripts/build-strokes.js` to add the new kanji's stroke order to `kanji/strokes.js`.
+   `node test.js` fails until you do.
 
 ### Changing the quiz mix
 
@@ -174,3 +177,6 @@ section has been used.
 - The vocabulary, grammar notes and quiz questions are written for this project. They follow the
   textbook's lesson structure but aren't copied from the book. There's no official JLPT kanji
   list, so the N5 list is the commonly used unofficial one.
+- Kanji stroke order comes from [KanjiVG](https://kanjivg.tagaini.net), © Ulrich Apel, under
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). `kanji/strokes.js` is derived
+  from it and shared under the same license.
