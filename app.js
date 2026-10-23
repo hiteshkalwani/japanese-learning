@@ -194,17 +194,30 @@ function renderVocab(view, words) {
   </table>`;
 }
 
+// Each stroke is drawn in turn; pathLength=1 lets one CSS dash animation fit every stroke.
+const strokeSvg = ch => `<svg viewBox="0 0 109 109" aria-hidden="true">${(window.STROKES?.[ch] || [])
+  .map((d, i) => `<path d="${d}" pathLength="1" style="--i:${i}"/>`).join('')}</svg>`;
+
 function renderKanjiList(view, ks) {
   view.innerHTML = `<div class="kanji-grid">${ks.map(k => `
     <article class="kanji">
-      <div class="char">${k.char}</div>
+      ${window.STROKES?.[k.char]
+        ? `<button class="char strokes" title="Play stroke order" aria-label="Play stroke order for ${k.char}">${strokeSvg(k.char)}</button>`
+        : `<div class="char">${k.char}</div>`}
       <div>
         <strong>${k.meaning}</strong>
         <div><small class="muted">音</small> ${k.on || '—'}　<small class="muted">訓</small> ${k.kun || '—'}</div>
         <ul>${k.examples.map(([w, r, en]) => `<li>${say(r)} ${w} <small class="muted">${r} · ${en}</small></li>`).join('')}</ul>
       </div>
     </article>`).join('')}
-  </div>`;
+  </div>
+  <p class="muted"><small>Tap a kanji to see its stroke order. Stroke data:
+    <a href="https://kanjivg.tagaini.net" target="_blank" rel="noopener">KanjiVG</a> (CC BY-SA 3.0).</small></p>`;
+  view.querySelectorAll('.strokes').forEach(b => b.onclick = () => {
+    b.classList.remove('play');
+    void b.offsetWidth; // restart the animation on every tap
+    b.classList.add('play');
+  });
 }
 
 function renderCards(view, words) {
