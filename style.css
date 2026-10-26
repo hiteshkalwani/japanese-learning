@@ -128,6 +128,14 @@ a.row { color: var(--fg); text-decoration: none; }
 .kanji { display: flex; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
 .kanji .char { font-size: 3rem; line-height: 1; min-width: 3.2rem; text-align: center; }
 .kanji ul { list-style: none; padding: 0; margin: 6px 0 0; }
+.strokes { flex: none; width: 4.5rem; height: 4.5rem; padding: 4px; background: none; color: var(--fg);
+  border: 1px dashed var(--line); border-radius: 10px; cursor: pointer; }
+.strokes:hover { border-color: var(--accent); }
+.strokes svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 4;
+  stroke-linecap: round; stroke-linejoin: round; }
+.strokes.play path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .45s linear calc(var(--i) * .5s) forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .strokes.play path { animation: none; stroke-dashoffset: 0; } }
 
 .grammar { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 4px 20px 12px; margin-bottom: 14px; }
 .grammar h3 { color: var(--accent); }
